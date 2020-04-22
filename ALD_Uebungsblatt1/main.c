@@ -17,8 +17,6 @@ Laufzeit Diagramm des Selection Sorts
 https://prnt.sc/s41tvv
 */
 
-int anzahlVergleiche = 0;
-
 void swap(double* xp, double* yp)
 {
 	int temp = *xp;
@@ -38,7 +36,6 @@ void selectionSort(double arr[], int n)
 				min_index = j;
 			}
 		}
-		anzahlVergleiche++;
 		swap(&arr[min_index], &arr[i]);
 	}
 }
@@ -113,7 +110,9 @@ int main()
 		printf("Laufzeit: %f\n", t3);
 #endif
 
-		printf("Anzahl der Vergleiche: %d\n\n", anzahlVergleiche);
+		//long float anzahlVergleiche = (size * (size - 1)) / 2;
+		float anzahlVergleiche = (0.5 * (pow(size, 2) + size));
+		printf("Anzahl der Vergleiche: %.0f\n\n", anzahlVergleiche);
 	}
 
 	getchar();
