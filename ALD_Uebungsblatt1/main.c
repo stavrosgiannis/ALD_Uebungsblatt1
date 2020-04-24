@@ -1,4 +1,4 @@
-#ifdef __linux__ 
+#ifdef __linux__
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -21,7 +21,7 @@ https://prnt.sc/s4zhjl
 
 */
 
-void swap(double* xp, double* yp)
+void swap(double *xp, double *yp)
 {
 	int temp = *xp;
 	*xp = *yp;
@@ -35,8 +35,10 @@ void selectionSort(double arr[], int n)
 	for (i = 0; i < n - 1; i++)
 	{
 		min_index = i;
-		for (j = i + 1; j < n; j++) {
-			if (arr[j] < arr[min_index]) {
+		for (j = i + 1; j < n; j++)
+		{
+			if (arr[j] < arr[min_index])
+			{
 				min_index = j;
 			}
 		}
@@ -64,12 +66,12 @@ void printArray(double arr[], int size)
 int main()
 {
 	// random Array size
-	double* randArr;
+	double *randArr;
 
 	for (int i = 10; i <= 17; i++)
 	{
 		int size = pow(2, i);
-		randArr = (double*)malloc(size * sizeof(double));
+		randArr = (double *)malloc(size * sizeof(double));
 
 		printf("sorting array[%d] with random numbers between 2^10-2^17..\n", size);
 
@@ -77,7 +79,7 @@ int main()
 		//printf("Array: \n");
 		//printArray(randArr, size);
 
-#ifdef __linux__ 
+#ifdef __linux__
 		//Laufzeit relevante var
 		double start;
 		struct timeval tm;
@@ -119,6 +121,9 @@ int main()
 		printf("comparisons: %.0f\n\n", anzahlVergleiche);
 	}
 
+#ifdef _WIN32
 	getchar();
+#endif
+
 	return 0;
 }
