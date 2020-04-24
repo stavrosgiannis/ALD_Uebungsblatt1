@@ -14,7 +14,11 @@
 
 /*
 Laufzeit Diagramm des Selection Sorts
-https://prnt.sc/s41tvv
+https://prnt.sc/s4zgpp
+
+comparisons Diagramm des Selection Sorts
+https://prnt.sc/s4zhjl
+
 */
 
 void swap(double* xp, double* yp)
@@ -107,12 +111,12 @@ int main()
 
 		//printf("Sorted Array: \n");
 		//printArray(randArr, size);
-		printf("Laufzeit: %f\n", t3);
+		printf("runtime: %f\n", t3);
 #endif
 
 		//long float anzahlVergleiche = (size * (size - 1)) / 2;
 		float anzahlVergleiche = (0.5 * (pow(size, 2) + size));
-		printf("Anzahl der Vergleiche: %.0f\n\n", anzahlVergleiche);
+		printf("comparisons: %.0f\n\n", anzahlVergleiche);
 	}
 
 	getchar();
