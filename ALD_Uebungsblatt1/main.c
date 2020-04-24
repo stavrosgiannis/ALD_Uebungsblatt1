@@ -1,4 +1,4 @@
-#ifdef linux
+#ifdef __linux__ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -77,7 +77,7 @@ int main()
 		//printf("Array: \n");
 		//printArray(randArr, size);
 
-#ifdef linux
+#ifdef __linux__ 
 		//Laufzeit relevante var
 		double start;
 		struct timeval tm;
@@ -91,13 +91,13 @@ int main()
 		// function call
 		selectionSort(randArr, size);
 
-		printArray(randArr, size);
-		printf("Laufzeit: %f\n", duration);
-
 		//Ende der Laufzeit
-		gettimeofday(&tm, NULL),
-			duration = (double)(tm.tv_sec) + ((double)(tm.tv_usec)) / 1.0e6 - start;
+		gettimeofday(&tm, NULL);
+		duration = (double)(tm.tv_sec) + ((double)(tm.tv_usec)) / 1.0e6 - start;
 		/////////////////////////////
+
+		//printArray(randArr, size);
+		printf("runtime: %f\n", duration);
 #endif
 
 #ifdef _WIN32
