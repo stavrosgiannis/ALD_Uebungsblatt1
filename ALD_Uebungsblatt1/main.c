@@ -1,3 +1,12 @@
+﻿/**
+* @file   main.c
+* @author Stavros Giannis
+* @date   25 April 2020
+* @see    main.h for documenation.
+*
+* Simple Selection Sort example.
+*/
+
 #ifdef __linux__
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,12 +27,19 @@ https://prnt.sc/s4zgpp
 
 comparisons Diagramm des Selection Sorts
 https://prnt.sc/s4zhjl
-
 */
 
-void swap(double *xp, double *yp)
+/**
+*  computes the factorial of a non-negative integer
+*
+*  @param n integer for which factorial should be computed
+*  @returns 1 if n is negative,
+*           MAXINT if factorial of n is greater than MAXINT
+*            factorial of n in other cases
+*/
+void swap(double* xp, double* yp)
 {
-	int temp = *xp;
+	double temp = *xp;
 	*xp = *yp;
 	*yp = temp;
 }
@@ -65,13 +81,12 @@ void printArray(double arr[], int size)
 
 int main()
 {
-	// random Array size
-	double *randArr;
+	double* randArr;
 
 	for (int i = 10; i <= 17; i++)
 	{
 		int size = pow(2, i);
-		randArr = (double *)malloc(size * sizeof(double));
+		randArr = (double*)malloc(size * sizeof(double));
 
 		printf("sorting array[%d] with random numbers between 2^10-2^17..\n", size);
 
@@ -116,9 +131,17 @@ int main()
 		printf("runtime: %f\n", t3);
 #endif
 
-		//long float anzahlVergleiche = (size * (size - 1)) / 2;
-		float anzahlVergleiche = (0.5 * (pow(size, 2) + size));
-		printf("comparisons: %.0f\n\n", anzahlVergleiche);
+		/*
+		* SelectionSort liegt somit in der Komplexitätsklasse O(n^2)
+		* Um ein Array mit n Einträgen mittels SelectionSort zu sortieren, muss n-1-mal das Minimum bestimmt und ebenso oft getauscht werden.
+		*
+		* Bei der ersten Bestimmung des Minimums sind n−1 Vergleiche notwendig, bei der zweiten n-2 Vergleiche usw.
+		*
+		* Da zum Ermitteln des Minimums immer der komplette noch nicht sortierte Teil des Arrays durchlaufen werden muss,
+		* benötigt SelectionSort auch im „besten Fall“ n(n − 1)/2 Vergleiche und im "worse Fall" im „besten Fall“ n(n +1)/2
+		*/
+		long long anzahlVergleiche = (0.5 * (pow(size, 2) + size));
+		printf("comparisons: %lld\n\n", anzahlVergleiche);
 	}
 
 #ifdef _WIN32
