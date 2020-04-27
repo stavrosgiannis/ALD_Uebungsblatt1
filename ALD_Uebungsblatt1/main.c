@@ -3,7 +3,7 @@
 * @author Stavros Giannis
 * @date   25 April 2020
 *
-* Simple Selection Sort example.
+* Simple Selection Sort example which runs in Windows and Linux OS!
 */
 
 #ifdef __linux__
@@ -120,8 +120,10 @@ int main()
 		printf("sorting array[%d] with random numbers between 2^10-2^17..\n", size);
 
 		fillArrRandom(randArr, size);
-		printf("Array: \n");
-		printArray(randArr, size);
+
+		// Debug purposes
+		//printf("Array: \n");
+		//printArray(randArr, size);
 
 #ifdef __linux__
 		//Laufzeit relevante var
@@ -155,8 +157,9 @@ int main()
 		clock_t t2 = clock();
 		float t3 = (float)(t2 - t1) / (float)CLOCKS_PER_SEC;
 
-		printf("Sorted Array: \n");
-		printArray(randArr, size);
+		// Debug purposes
+		//printf("Sorted Array: \n");
+		//printArray(randArr, size);
 
 		printf("runtime: %f\n", t3);
 #endif
