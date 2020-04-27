@@ -2,7 +2,6 @@
 * @file   main.c
 * @author Stavros Giannis
 * @date   25 April 2020
-* @see    main.h for documenation.
 *
 * Simple Selection Sort example.
 */
@@ -22,29 +21,39 @@
 #endif
 
 /*
-Laufzeit Diagramm des Selection Sorts
-https://prnt.sc/s4zgpp
-
-comparisons Diagramm des Selection Sorts
-https://prnt.sc/s4zhjl
+*
+* Laufzeit Diagramm des Selection Sorts
+* https://prnt.sc/s4zgpp
+*
+* comparisons Diagramm des Selection Sorts
+* https://prnt.sc/s4zhjl
+*
 */
 
 /**
-*  computes the factorial of a non-negative integer
+*  swap to given elements in an array
 *
-*  @param n integer for which factorial should be computed
-*  @returns 1 if n is negative,
-*           MAXINT if factorial of n is greater than MAXINT
-*            factorial of n in other cases
+*  @param xp long integer stands for the first item in a list to swap with
+*  @param yp stands for the second item to swap with
+*  @returns swaps 2 of its given parameters in a list
+
 */
-void swap(double* xp, double* yp)
+void swap(long int* xp, long int* yp)
 {
-	double temp = *xp;
+	long int temp = *xp;
 	*xp = *yp;
 	*yp = temp;
 }
 
-void selectionSort(double arr[], int n)
+/**
+*  computing selection-sort algorithm
+*
+*  @param arr stands for an array
+*  @param n stands for the size of it's given array
+*  @returns sorts an array from MIN to MAX
+*
+*/
+void selectionSort(long int arr[], int n)
 {
 	int i, j, min_index;
 
@@ -62,7 +71,15 @@ void selectionSort(double arr[], int n)
 	}
 }
 
-void fillArrRandom(double arr[], int n)
+/**
+*  fills the given array with random generated items
+*
+*  @param arr stands for an array
+*  @param n stands for the size of it's given array
+*  @returns an array with random filled elements
+*
+*/
+void fillArrRandom(long int arr[], int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -70,29 +87,41 @@ void fillArrRandom(double arr[], int n)
 	}
 }
 
-void printArray(double arr[], int size)
+/**
+*  prints an array for DEBUG purposes
+*
+*  @param arr stands for an array
+*  @param n stands for the size of it's given array
+*  @returns printf of the array
+*
+*/
+void printArray(long int arr[], int size)
 {
+	printf("[ ");
 	for (int i = 0; i < size; i++)
 	{
-		printf("%f ", arr[i]);
+		printf("%li ", arr[i]);
+		if (i < size - 1) {
+			printf(", ");
+		}
 	}
-	printf("\n");
+	printf("]\n");
 }
 
 int main()
 {
-	double* randArr;
+	long int* randArr;
 
 	for (int i = 10; i <= 17; i++)
 	{
 		int size = pow(2, i);
-		randArr = (double*)malloc(size * sizeof(double));
+		randArr = (long int*)malloc(size * sizeof(long int));
 
 		printf("sorting array[%d] with random numbers between 2^10-2^17..\n", size);
 
 		fillArrRandom(randArr, size);
-		//printf("Array: \n");
-		//printArray(randArr, size);
+		printf("Array: \n");
+		printArray(randArr, size);
 
 #ifdef __linux__
 		//Laufzeit relevante var
@@ -124,10 +153,11 @@ int main()
 		selectionSort(randArr, size);
 
 		clock_t t2 = clock();
-		double t3 = (double)(t2 - t1) / (double)CLOCKS_PER_SEC;
+		float t3 = (float)(t2 - t1) / (float)CLOCKS_PER_SEC;
 
-		//printf("Sorted Array: \n");
-		//printArray(randArr, size);
+		printf("Sorted Array: \n");
+		printArray(randArr, size);
+
 		printf("runtime: %f\n", t3);
 #endif
 
@@ -138,13 +168,14 @@ int main()
 		* Bei der ersten Bestimmung des Minimums sind n−1 Vergleiche notwendig, bei der zweiten n-2 Vergleiche usw.
 		*
 		* Da zum Ermitteln des Minimums immer der komplette noch nicht sortierte Teil des Arrays durchlaufen werden muss,
-		* benötigt SelectionSort auch im „besten Fall“ n(n − 1)/2 Vergleiche und im "worse Fall" im „besten Fall“ n(n +1)/2
+		* benötigt SelectionSort auch im „besten Fall“ n(n − 1)/2 Vergleiche und im „schlechtesten Fall“ n(n +1)/2
 		*/
 		long long anzahlVergleiche = (0.5 * (pow(size, 2) + size));
 		printf("comparisons: %lld\n\n", anzahlVergleiche);
 	}
 
 #ifdef _WIN32
+	// verhindert das window closing
 	getchar();
 #endif
 
